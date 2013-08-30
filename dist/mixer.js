@@ -2,30 +2,45 @@
   var __slice = [].slice;
 
   (function(root) {
-    var mixerList, ownProp;
-    mixerList = {};
+    var mixinList, ownProp;
     ownProp = Object.hasOwnProperty;
+    mixinList = {};
     if (DEBUG) {
-      root.mixerList = mixerList;
+      root.mixinList = mixinList;
     }
     root.mixer = function() {
-      var key, n, name, params, target, value, _i, _len, _ref;
+      var mixFunction, mixObject, n, name, params, target, _i, _len;
       target = arguments[0], name = arguments[1], params = 3 <= arguments.length ? __slice.call(arguments, 2) : [];
+      mixObject = function(target, obj) {
+        var key, value;
+        for (key in obj) {
+          value = obj[key];
+          if (!ownProp.call(target, key)) {
+            target[key] = value;
+          }
+        }
+        return null;
+      };
+      mixFunction = function(target, func, params) {
+        return func.apply(target, params);
+      };
       if (Array.isArray(name)) {
         for (_i = 0, _len = name.length; _i < _len; _i++) {
           n = name[_i];
           root.mixer(target, n, params);
         }
       }
-      if (typeof mixinList[name] === 'function') {
-        mixinList[name].apply(target, params);
+      if (typeof name === 'string' && ownProp.call(mixinList, name)) {
+        if (typeof mixinList[name] === 'function') {
+          mixFunction(target, mixinList[name], params);
+        } else {
+          mixObject(target, mixinList[name]);
+        }
       } else {
-        _ref = mixinList[name];
-        for (key in _ref) {
-          value = _ref[key];
-          if (!ownProp.call(target, key)) {
-            target[key] = value;
-          }
+        if (typeof name === 'function') {
+          mixFunction(target, name, params);
+        } else {
+          mixObject(target, name);
         }
       }
       return null;
