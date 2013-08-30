@@ -4,6 +4,9 @@ do (root = @) ->
 
   mixinList = {}
   
+  # DEBUG is set to false by default
+  DEBUG = false
+  
   # Expose mixer list if debug
   root.mixinList = mixinList if DEBUG
 
