@@ -1,19 +1,32 @@
 do (root = @) ->
-  mixerList = {}
   
   ownProp = Object.hasOwnProperty
+
+  mixinList = {}
   
   # Expose mixer list if debug
-  root.mixerList = mixerList if DEBUG
+  root.mixinList = mixinList if DEBUG
 
   root.mixer = (target, name, params...) ->
+    mixObject = (target, obj) ->
+      for key, value of obj when not ownProp.call target, key
+        target[key] = value
+      null
+      
+    mixFunction = (target, func, params) -> func.apply target, params
+    
     root.mixer(target, n, params) for n in name if Array.isArray name
 
-    if typeof mixinList[name] is 'function'
-      mixinList[name].apply(target, params)
+    if typeof name is 'string' and ownProp.call mixinList, name
+      if typeof mixinList[name] is 'function'
+        mixFunction target, mixinList[name], params
+      else
+        mixObject target, mixinList[name]
     else
-      for key, value of mixinList[name] when not ownProp.call target, key
-        target[key] = value
+      if typeof name is 'function'
+        mixFunction target, name, params
+      else
+        mixObject target, name
 
     null
 
