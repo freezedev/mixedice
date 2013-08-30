@@ -2,9 +2,10 @@
   var __slice = [].slice;
 
   (function(root) {
-    var mixinList, ownProp;
+    var DEBUG, mixinList, ownProp;
     ownProp = Object.hasOwnProperty;
     mixinList = {};
+    DEBUG = false;
     if (DEBUG) {
       root.mixinList = mixinList;
     }
