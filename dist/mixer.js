@@ -1,15 +1,20 @@
 (function() {
-  var __slice = [].slice;
-
   (function(root) {
-    var DEBUG, mixinList, ownProp;
-    ownProp = Object.hasOwnProperty;
+    return root.udefine.globals['mixer'] = root.mixer;
+  })(this);
+
+}).call(this);
+
+(function() {
+  var ownProp,
+    __slice = [].slice;
+
+  ownProp = Object.hasOwnProperty;
+
+  udefine('mixer', function() {
+    var mixer, mixinList;
     mixinList = {};
-    DEBUG = false;
-    if (DEBUG) {
-      root.mixinList = mixinList;
-    }
-    root.mixer = function() {
+    mixer = function() {
       var mixFunction, mixObject, n, name, params, target, _i, _len;
       target = arguments[0], name = arguments[1], params = 3 <= arguments.length ? __slice.call(arguments, 2) : [];
       mixObject = function(target, obj) {
@@ -28,7 +33,7 @@
       if (Array.isArray(name)) {
         for (_i = 0, _len = name.length; _i < _len; _i++) {
           n = name[_i];
-          root.mixer(target, n, params);
+          mixer(target, n, params);
         }
       }
       if (typeof name === 'string' && ownProp.call(mixinList, name)) {
@@ -46,7 +51,7 @@
       }
       return null;
     };
-    root.mixer.define = function(name, definition) {
+    mixer.define = function(name, definition) {
       if (!((name != null) || (definition != null))) {
         return;
       }
@@ -56,18 +61,16 @@
       mixinList[name] = definition;
       return null;
     };
-    root.mixer.remove = function(name) {
+    mixer.remove = function(name) {
       if ((name != null) && (mixinList[name] != null)) {
         delete mixinList[name];
       }
       return null;
     };
-    root.mixer.exists = function(name) {
+    mixer.exists = function(name) {
       return ownProp.call(mixinList, name);
     };
-    return typeof root.define === "function" ? root.define('mixer', function() {
-      return root.mixer;
-    }) : void 0;
-  })(this);
+    return mixer;
+  });
 
 }).call(this);
