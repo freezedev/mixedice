@@ -1,16 +1,9 @@
-do (root = @) ->
-  
-  ownProp = Object.hasOwnProperty
+ownProp = Object.hasOwnProperty
 
+udefine 'mixer', ->
   mixinList = {}
-  
-  # DEBUG is set to false by default
-  DEBUG = false
-  
-  # Expose mixer list if debug
-  root.mixinList = mixinList if DEBUG
 
-  root.mixer = (target, name, params...) ->
+  mixer = (target, name, params...) ->
     mixObject = (target, obj) ->
       for key, value of obj when not ownProp.call target, key
         target[key] = value
@@ -18,7 +11,7 @@ do (root = @) ->
       
     mixFunction = (target, func, params) -> func.apply target, params
     
-    root.mixer(target, n, params) for n in name if Array.isArray name
+    mixer(target, n, params) for n in name if Array.isArray name
 
     if typeof name is 'string' and ownProp.call mixinList, name
       if typeof mixinList[name] is 'function'
@@ -33,7 +26,7 @@ do (root = @) ->
 
     null
 
-  root.mixer.define = (name, definition) ->
+  mixer.define = (name, definition) ->
     return unless name? or definition?
     return if mixinList[name]?
 
@@ -41,13 +34,11 @@ do (root = @) ->
 
     null
     
-  root.mixer.remove = (name) ->
+  mixer.remove = (name) ->
     delete mixinList[name] if name? and mixinList[name]?
 
     null
 
-  root.mixer.exists = (name) -> ownProp.call mixinList, name
+  mixer.exists = (name) -> ownProp.call mixinList, name
   
-  # Provide AMD module as well, global property still needs to be available
-  # though
-  root.define? 'mixer', -> root.mixer
+  mixer
