@@ -1,7 +1,11 @@
 (function() {
-  (function(root) {
-    return root.udefine.globals['mixer'] = root.mixer;
-  })(this);
+  (function(root, name) {
+    root.udefine.globals[name] = root[name];
+    return root.udefine.inject[name] = {
+      name: name,
+      root: root
+    };
+  })(this, 'mixer');
 
 }).call(this);
 
