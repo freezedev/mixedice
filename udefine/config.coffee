@@ -1,4 +1,3 @@
-do (root = @, name = 'mixer') ->
-  root.udefine.globals[name] = root[name]
-
-  root.udefine.inject[name] = {name, root}
+do (name = 'mixer') ->
+  udefine.configure (root) ->
+    root.udefine.inject.add name
