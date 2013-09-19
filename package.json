@@ -7,5 +7,8 @@
     "grunt-contrib-uglify": "*",
     "grunt-contrib-coffee": "*",
     "matchdep": "*"
+  },
+  "dependencies": {
+    "udefine": "~0.8.2"
   }
 }
