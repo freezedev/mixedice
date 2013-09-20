@@ -6,6 +6,8 @@
     "grunt-coffeelint": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-coffee": "*",
+    "grunt-mocha": "*",
+    "grunt-mocha-test": "*",
     "matchdep": "*"
   },
   "dependencies": {
