@@ -1,6 +1,8 @@
 require 'udefine/global'
-mixer = require '../dist/udefine'
+mixer = require '../dist/mixer'
 {expect} = require 'chai'
+
+
 
 describe 'mixer', ->
   it 'empty parameters', ->
