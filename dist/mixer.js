@@ -1,7 +1,7 @@
 (function() {
   (function(name) {
     return udefine.configure(function(root) {
-      return root.udefine.inject.add(name);
+      return udefine.inject.add(name);
     });
   })('mixer');
 
@@ -19,6 +19,9 @@
     mixer = function() {
       var mixFunction, mixObject, n, name, params, target, _i, _len;
       target = arguments[0], name = arguments[1], params = 3 <= arguments.length ? __slice.call(arguments, 2) : [];
+      if (target == null) {
+        return;
+      }
       mixObject = function(target, obj) {
         var key, value;
         for (key in obj) {
