@@ -4,6 +4,8 @@ udefine 'mixer', ->
   mixinList = {}
 
   mixer = (target, name, params...) ->
+    return unless target?
+    
     mixObject = (target, obj) ->
       for key, value of obj when not ownProp.call target, key
         target[key] = value
