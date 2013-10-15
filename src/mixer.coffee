@@ -8,13 +8,30 @@ udefine 'mixer', ->
     
     # When objects are mixed in together
     mixObject = (target, obj) ->
-      
-      
-      #if Array.isArray target
+      splitObject = (obj) ->
+        keys = Object.keys(obj)
         
+        directObj = do ->
+          result = {}
+          
+          for key in keys
+            result[key] = obj[key]
+          
+          result
         
-      for key, value of obj when not ownProp.call target, key
-        target[key] = value
+        protoObj = Object.getPrototypeOf(obj)
+        
+        [directObj, protoObj]
+      
+      if Array.isArray target
+        splitted = splitObject obj
+        
+        mixObject target[0], splitted[0]
+        mixObject target[1], splitted[1]
+      else
+        for key, value of obj when not ownProp.call target, key
+          target[key] = value
+      
       null
     
     # Mix function into the object
