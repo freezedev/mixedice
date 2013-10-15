@@ -23,11 +23,32 @@
         return;
       }
       mixObject = function(target, obj) {
-        var key, value;
-        for (key in obj) {
-          value = obj[key];
-          if (!ownProp.call(target, key)) {
-            target[key] = value;
+        var key, splitObject, splitted, value;
+        splitObject = function(obj) {
+          var directObj, keys, protoObj;
+          keys = Object.keys(obj);
+          directObj = (function() {
+            var key, result, _i, _len;
+            result = {};
+            for (_i = 0, _len = keys.length; _i < _len; _i++) {
+              key = keys[_i];
+              result[key] = obj[key];
+            }
+            return result;
+          })();
+          protoObj = Object.getPrototypeOf(obj);
+          return [directObj, protoObj];
+        };
+        if (Array.isArray(target)) {
+          splitted = splitObject(obj);
+          mixObject(target[0], splitted[0]);
+          mixObject(target[1], splitted[1]);
+        } else {
+          for (key in obj) {
+            value = obj[key];
+            if (!ownProp.call(target, key)) {
+              target[key] = value;
+            }
           }
         }
         return null;

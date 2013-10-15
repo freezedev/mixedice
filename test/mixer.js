@@ -10,7 +10,6 @@
   describe('mixer', function() {
     return it('empty parameters', function() {
       var result;
-      console.log(mixer);
       result = mixer();
       return expect(result).to.be('undefined');
     });
