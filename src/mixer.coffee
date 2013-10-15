@@ -6,15 +6,24 @@ udefine 'mixer', ->
   mixer = (target, name, params...) ->
     return unless target?
     
+    # When objects are mixed in together
     mixObject = (target, obj) ->
+      
+      
+      #if Array.isArray target
+        
+        
       for key, value of obj when not ownProp.call target, key
         target[key] = value
       null
-      
+    
+    # Mix function into the object
     mixFunction = (target, func, params) -> func.apply target, params
     
+    # Allows to mix a lot of objects, functions and all kinds of crazy stuff
     mixer(target, n, params) for n in name if Array.isArray name
 
+    # Check what's what and execute functions accordingly
     if typeof name is 'string' and ownProp.call mixinList, name
       if typeof mixinList[name] is 'function'
         mixFunction target, mixinList[name], params
@@ -28,6 +37,7 @@ udefine 'mixer', ->
 
     null
 
+  # Define a mixin to be used a lot of times
   mixer.define = (name, definition) ->
     return unless name? or definition?
     return if mixinList[name]?
@@ -35,12 +45,14 @@ udefine 'mixer', ->
     mixinList[name] = definition
 
     null
-    
+  
+  # Remove a mixin
   mixer.remove = (name) ->
     delete mixinList[name] if name? and mixinList[name]?
 
     null
 
+  # Check if a mixin exists
   mixer.exists = (name) -> ownProp.call mixinList, name
   
   mixer
