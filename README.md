@@ -5,3 +5,7 @@ mixer
 [![devDependency Status](https://david-dm.org/freezedev/mixer/dev-status.png)](https://david-dm.org/freezedev/mixer#info=devDependencies)
 
 Simple and effective mixin library
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/freezedev/mixer/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
