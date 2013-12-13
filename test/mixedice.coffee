@@ -1,10 +1,10 @@
 require 'udefine/global'
-mixer = require '../dist/mixer'
+mixer = require '../dist/mixedice'
 {expect} = require 'chai'
 
 
 
-describe 'mixer', ->
+describe 'mixedice', ->
   it 'empty parameters', ->
     result = mixer()
     expect(result).to.be('undefined')

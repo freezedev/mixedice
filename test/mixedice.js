@@ -3,7 +3,7 @@
 
   require('udefine/global');
 
-  mixer = require('../dist/mixer');
+  mixer = require('../dist/mixedice');
 
   expect = require('chai').expect;
 
