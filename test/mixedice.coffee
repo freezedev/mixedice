@@ -7,4 +7,5 @@ mixedice = require '../dist/mixedice'
 describe 'mixedice', ->
   it 'empty parameters', ->
     result = mixedice()
-    expect(result).to.be('undefined')
+    expect(result).to.be.a('undefined')
+    expect(result).to.equal(undefined)
