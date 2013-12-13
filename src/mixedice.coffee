@@ -73,3 +73,7 @@ udefine 'mixedice', ->
   mixedice.exists = (name) -> ownProp.call mixinList, name
   
   mixedice
+  
+# Our current CommonJS workaround
+if udefine.env.commonjs
+  udefine.require 'mixedice', (mixedice) -> module.exports = mixedice
