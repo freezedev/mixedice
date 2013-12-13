@@ -52,7 +52,7 @@ udefine 'mixedice', ->
       else
         mixObject target, name
 
-    null
+    target
 
   # Define a mixin to be used a lot of times
   mixedice.define = (name, definition) ->
