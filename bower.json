@@ -7,7 +7,7 @@
     "Johannes Stein <johannesstein@freeze-dev.com>"
   ],
   "description": "Provide reusable mixins",
-  "main": "dist/mixer.js",
+  "main": "dist/mixedice.js",
   "keywords": [
     "mixin",
     "mixins",
