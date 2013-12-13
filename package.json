@@ -4,15 +4,36 @@
   "version": "0.5.0",
   "devDependencies": {
     "grunt": "0.4.x",
-    "grunt-coffeelint": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-contrib-coffee": "*",
-    "grunt-mocha": "*",
-    "grunt-mocha-test": "*",
+    "grunt-coffeelint": "0.0.8",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-mocha": "~0.4.7",
+    "grunt-mocha-test": "~0.8.1",
     "chai": "*",
-    "matchdep": "*"
+    "matchdep": "~0.3.0"
   },
   "dependencies": {
     "udefine": "~0.8.2"
+  },
+  "main": "dist/mixedice.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freezedev/mixedice.git"
+  },
+  "keywords": [
+    "mixin",
+    "resuable",
+    "mixins"
+  ],
+  "author": "Johannes Stein",
+  "license": "Public domain",
+  "bugs": {
+    "url": "https://github.com/freezedev/mixedice/issues"
   }
 }
