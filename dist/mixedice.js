@@ -3,7 +3,7 @@
     return udefine.configure(function(root) {
       return udefine.inject.add(name);
     });
-  })('mixer');
+  })('mixedice');
 
 }).call(this);
 
@@ -13,10 +13,10 @@
 
   ownProp = Object.hasOwnProperty;
 
-  udefine('mixer', function() {
-    var mixer, mixinList;
+  udefine('mixedice', function() {
+    var mixedice, mixinList;
     mixinList = {};
-    mixer = function() {
+    mixedice = function() {
       var mixFunction, mixObject, n, name, params, target, _i, _len;
       target = arguments[0], name = arguments[1], params = 3 <= arguments.length ? __slice.call(arguments, 2) : [];
       if (target == null) {
@@ -59,7 +59,7 @@
       if (Array.isArray(name)) {
         for (_i = 0, _len = name.length; _i < _len; _i++) {
           n = name[_i];
-          mixer(target, n, params);
+          mixedice(target, n, params);
         }
       }
       if (typeof name === 'string' && ownProp.call(mixinList, name)) {
@@ -75,9 +75,9 @@
           mixObject(target, name);
         }
       }
-      return null;
+      return target;
     };
-    mixer.define = function(name, definition) {
+    mixedice.define = function(name, definition) {
       if (!((name != null) || (definition != null))) {
         return;
       }
@@ -87,16 +87,22 @@
       mixinList[name] = definition;
       return null;
     };
-    mixer.remove = function(name) {
+    mixedice.remove = function(name) {
       if ((name != null) && (mixinList[name] != null)) {
         delete mixinList[name];
       }
       return null;
     };
-    mixer.exists = function(name) {
+    mixedice.exists = function(name) {
       return ownProp.call(mixinList, name);
     };
-    return mixer;
+    return mixedice;
   });
+
+  if (udefine.env.commonjs) {
+    udefine.require('mixedice', function(mixedice) {
+      return module.exports = mixedice;
+    });
+  }
 
 }).call(this);
