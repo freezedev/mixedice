@@ -1,9 +1,9 @@
 ownProp = Object.hasOwnProperty
 
-udefine 'mixer', ->
+udefine 'mixedice', ->
   mixinList = {}
 
-  mixer = (target, name, params...) ->
+  mixedice = (target, name, params...) ->
     return unless target?
     
     # When objects are mixed in together
@@ -38,7 +38,7 @@ udefine 'mixer', ->
     mixFunction = (target, func, params) -> func.apply target, params
     
     # Allows to mix a lot of objects, functions and all kinds of crazy stuff
-    mixer(target, n, params) for n in name if Array.isArray name
+    mixedice(target, n, params) for n in name if Array.isArray name
 
     # Check what's what and execute functions accordingly
     if typeof name is 'string' and ownProp.call mixinList, name
@@ -55,7 +55,7 @@ udefine 'mixer', ->
     null
 
   # Define a mixin to be used a lot of times
-  mixer.define = (name, definition) ->
+  mixedice.define = (name, definition) ->
     return unless name? or definition?
     return if mixinList[name]?
 
@@ -64,12 +64,12 @@ udefine 'mixer', ->
     null
   
   # Remove a mixin
-  mixer.remove = (name) ->
+  mixedice.remove = (name) ->
     delete mixinList[name] if name? and mixinList[name]?
 
     null
 
   # Check if a mixin exists
-  mixer.exists = (name) -> ownProp.call mixinList, name
+  mixedice.exists = (name) -> ownProp.call mixinList, name
   
-  mixer
+  mixedice
