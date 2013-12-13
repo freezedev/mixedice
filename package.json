@@ -1,7 +1,7 @@
 {
   "name": "mixedice",
   "description": "Simple and reusable mixins",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "devDependencies": {
     "grunt": "0.4.x",
     "grunt-coffeelint": "0.0.8",
