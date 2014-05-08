@@ -13,7 +13,7 @@
 
   ownProp = Object.hasOwnProperty;
 
-  udefine('mixedice', function() {
+  udefine('mixedice', [], function() {
     var mixedice, mixinList;
     mixinList = {};
     mixedice = function() {
